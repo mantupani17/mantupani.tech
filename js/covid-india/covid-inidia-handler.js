@@ -33,9 +33,10 @@ $(document).ready(function(e){
                 html += '<td>'+covidData.confirmed+'</td>';
                 html += '<td>'+covidData.active+'</td>';
                 html += '<td>'+covidData.recovered+'</td>';
-                html += '<td>'+covidData.deaths+'</td>';
+                html += '<td class="make-red">'+covidData.deaths+'</td>';
                 html += '</tr>';
                 $('tbody', '#covid_list_table_india').append(html);
+               
             }
             this.getAllDistrictData();
             $('#search_state').on('keyup', function(){
@@ -46,6 +47,8 @@ $(document).ready(function(e){
                     CovidTask.renderData();
                 }
             })
+
+            
         },
 
         getAllDistrictData: function(){

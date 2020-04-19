@@ -88,7 +88,7 @@
         }
 
         this.totalTests = function(){
-            totalTests = totalTestData[totalTestData.length-1].totalsamplestested;
+            totalTests = totalTestData[totalTestData.length-1].totalsamplestested || totalTestData[totalTestData.length-2].totalsamplestested
             return totalTests;
         }
     }
