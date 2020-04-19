@@ -1,9 +1,11 @@
-(function(window , covid_apis, covid_jobs, covid_utils, $){
+(function(window , covid_jobs, covid_utils, $){
     var totalRecoverd = 0;
     var totalDeath = 0 ;
     var totalActiveCases = 0;
     var totalCases = 0;
     var allStates = [];
+    var totalTestData = [];
+    var totalTests = 0;
 
     var covid_india = {
         totalCountData: [],
@@ -18,6 +20,7 @@
             covid_india.data = covid_jobs.allData;
             this.allStateInfo = covid_jobs.allData;
             covid_india.totalCountData = covid_jobs.allData.statewise;
+            totalTestData = covid_india.data.tested;
             this.getTotalCounts('Total');
         }
 
@@ -84,10 +87,11 @@
             return stateInfo;
         }
 
+        this.totalTests = function(){
+            totalTests = totalTestData[totalTestData.length-1].totalsamplestested;
+            return totalTests;
+        }
     }
-
-    
-
 
     // district information data
     function DistrictInformation(){
@@ -117,9 +121,11 @@
     function PrepareChartData(){
         this.chartData = [];
         this.lineChartData = [];
+        this.totalTests = [];
         this.init = function(){
             this.chartData = covid_india.totalCountData;
             this.lineChartData = covid_india.data.cases_time_series;
+            this.totalTests = covid_india.data.tested;
         }
 
         this.prepareBarChartData = function(mostCases){
@@ -259,9 +265,11 @@
 
               return {type:"line" ,data:data, options:options};
 
-            console.log(labels)
         } 
         
+        this.prepareTestedCasesChartData = function(month){
+            var labels = [];
+        }
     }
 
 
@@ -271,6 +279,6 @@
     covid_india['DistrictInformation'].init();
     covid_india['PrepareChartData'] = new PrepareChartData();
     covid_india['PrepareChartData'].init();
-    console.log(covid_india)
+    // console.log(covid_india)
     window['covid_india'] = covid_india;
-})(window , covid_apis, covid_jobs, covid_utils, $)
+})(window, covid_jobs, covid_utils, $)

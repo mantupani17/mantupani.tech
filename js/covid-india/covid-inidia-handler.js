@@ -4,6 +4,7 @@ $(document).ready(function(e){
     $('recovered').html(covid_india.StateInformation.getTotalRecoveredCases());
     $('deaths').html(covid_india.StateInformation.getTotalDeaths());
     $('cases').html(covid_india.StateInformation.getTotalCases());
+    $('tests').html(covid_india.StateInformation.totalTests());
     
 
     var CovidTask = {
@@ -85,6 +86,7 @@ $(document).ready(function(e){
             $('#go-back-state').on('click', function(e){
                 allStates = covid_india.StateInformation.getAllStates();
                 CovidTask.renderData();
+                CovidChartTask.loadStateChart();
             });
 
             $('#search_district').on('keyup', function(){
@@ -119,7 +121,7 @@ $(document).ready(function(e){
             })
 
             // handle the select month component
-            this.disableAllMothFromCurrent();
+            this.disableAllMothFromCurrent('#month-cases');
             var mCases = $('#month-cases').val();
             var type = $('#type-cases').val();
             var monthdata = covid_india.PrepareChartData.prepreLineChartData(mCases, type);
@@ -131,10 +133,15 @@ $(document).ready(function(e){
                 monthdata = covid_india.PrepareChartData.prepreLineChartData(mCases, type);
                 linechart = new Chart(ctxLine, monthdata);
             })
+
+            // tested cases analysis
+            this.disableAllMothFromCurrent('#month-tests-cases');
+            var mTCases = $('#month-tests-cases').val();
+            var monthtestdata = covid_india.PrepareChartData.prepareTestedCasesChartData(mTCases);
         },
         
-        disableAllMothFromCurrent: function(){
-            var months = $('option','#month-cases');
+        disableAllMothFromCurrent: function(element){
+            var months = $('option',element);
             var currentMonth = new Date().getMonth()+1;
             for (let index = 0; index < months.length; index++) {
                 const element = months[index];

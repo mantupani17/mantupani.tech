@@ -131,6 +131,11 @@
                 </div>
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
+                        <h5>Total Tests: <tests>0</tests></h5>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
                         <h5>Total Cases: <cases>0</cases></h5>
                     </div>
                 </div>
@@ -251,7 +256,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <option value="dailyconfirmed">Confirmed</option>
                             </select>
                             <select id="month-cases" class="pull-right filter-month">
-                                <option value="">Select Month</option>
+                                <option value="" disabled>Select Month</option>
                                 <option value="January">January</option>
                                 <option value="February">February</option>
                                 <option value="March">March</option>
@@ -266,6 +271,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <option value="December">December</option>
                             </select>
                             <canvas id="bar-linechart-states" height="100%" width="100%"></canvas>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 col-md-12 col-xl-12">
+                            
+                            <select id="month-tests-cases" class="pull-right filter-month">
+                                <option value="" disabled>Select Month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April" selected>April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                            <canvas id="bar-linechart-test-analysis" height="100%" width="100%"></canvas>
                         </div>
                     </div>
                 </div>
@@ -285,7 +309,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
             <div class="row">
                 <div class="col-sm-12 col-lg-12 col-md-12 col-xl-12">
-                    <table class="table" id="covid_list_table_india">
+                    <table class="table table-responsive" id="covid_list_table_india">
                         <caption>Whole District Wise Data</caption>
                         <thead class="thead-light">
                             <tr>
