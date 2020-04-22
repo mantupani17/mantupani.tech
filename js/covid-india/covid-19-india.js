@@ -214,15 +214,19 @@
 
         this.prepreLineChartData = function(month , type){
             var labels = [];
+            var fillColor = "rgba(0,255,8,1)";
+            if(type == "dailydeceased"){
+                fillColor = "rgba(255,0,0,1)";
+            }else if(type == "dailyconfirmed"){
+                fillColor = "rgba(27,0,255,1)";
+            }
             var datasets = [
                 {
                     label: month+" All "+type,
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
+                    borderColor: fillColor,
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    pointHighlightStroke: fillColor,
                     data: []
                 }
             ];
@@ -269,6 +273,81 @@
         
         this.prepareTestedCasesChartData = function(month){
             var labels = [];
+            var datasets = [
+                {
+                    label: "All confirmed cases in the month "+month,
+                    fillColor: "rgba(27,0,255,1)",
+                    borderColor:"rgba(27,0,255,1)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: []
+                },
+                {
+                    label: "All recoverd cases in the month "+month,
+                    fillColor: "rgba(0,255,8,1)",
+                    borderColor:"rgba(0,255,8,1)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: []
+                },
+                {
+                    label: "All deaths in the month "+month,
+                    fillColor: "rgba(255,0,0,1)",
+                    borderColor:"rgba(255,0,0,1)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: []
+                }
+            ];
+
+            for (const key in this.lineChartData) {
+                if (this.lineChartData.hasOwnProperty(key)) {
+                    const element = this.lineChartData[key];
+                    const date = element.date.split(" ")
+                    if(date[1].toLowerCase() == month.toLowerCase() ){
+                        labels.push(element.date);
+                        datasets[0].data.push(parseInt(element.dailyconfirmed));
+                        datasets[1].data.push(parseInt(element.dailyrecovered));
+                        datasets[2].data.push(parseInt(element.dailydeceased));
+                    }
+                    
+                }
+            }
+
+            var data = {
+                labels: labels,
+                datasets:datasets
+            };
+            
+              //options
+              var options = {
+                responsive: true,
+                title: {
+                  display: true,
+                  position: "top",
+                  text: "cases in the month "+month,
+                  fontSize: 18,
+                  fontColor: "#111"
+                },
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      min: 10
+                    }
+                  }]
+                }
+              };
+
+              return {type:"line" ,data:data, options:options};
         }
     }
 

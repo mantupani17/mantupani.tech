@@ -141,6 +141,13 @@ $(document).ready(function(e){
             this.disableAllMothFromCurrent('#month-tests-cases');
             var mTCases = $('#month-tests-cases').val();
             var monthtestdata = covid_india.PrepareChartData.prepareTestedCasesChartData(mTCases);
+            var testCtx = $('#bar-linechart-test-analysis');
+            var testLinechart = new Chart(testCtx, monthtestdata);
+            $('#month-tests-cases').on('change', function(e){
+                mCases = $(this).val();
+                monthtestdata = covid_india.PrepareChartData.prepareTestedCasesChartData(mTCases);
+                testLinechart = new Chart(testCtx, monthtestdata);
+            })
         },
         
         disableAllMothFromCurrent: function(element){
