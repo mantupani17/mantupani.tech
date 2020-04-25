@@ -31,14 +31,18 @@ $(document).ready(function(e){
                 html += '<td>'+(i+1)+'</td>';
                 html += '<td><a href="javascript:void(0);" class="view-district-data" data-state="'+covidData.state+'">'+covidData.state+'</a></td>';
                 html += '<td>'+covidData.confirmed+'</td>';
-                html += '<td>'+covidData.active+'</td>';
-                html += '<td>'+covidData.recovered+'</td>';
-                html += '<td class="make-red">'+covidData.deaths+'</td>';
+                html += '<td id="td-act-'+i+'">'+covidData.active+'</td>';
+                html += '<td id="td-rec-'+i+'">'+covidData.recovered+'</td>';
+                html += '<td class="make-red" id="td-'+i+'">'+covidData.deaths+'</td>';
                 html += '</tr>';
                 $('tbody', '#covid_list_table_india').append(html);
-               
+                covid_events.CustomEvents.initializeCustomEvent('td-'+i , 'changeColor' ,{backgroundColor:"red", color:'white'}); 
+                covid_events.CustomEvents.initializeCustomEvent('td-rec-'+i , 'changeColor' ,{backgroundColor:"green"});                             
+                covid_events.CustomEvents.initializeCustomEvent('td-act-'+i , 'changeColor' ,{backgroundColor:"blue"});                             
             }
             this.getAllDistrictData();
+
+            // search
             $('#search_state').on('keyup', function(){
                 var state = $(this).val();
                 if(state){
@@ -48,6 +52,10 @@ $(document).ready(function(e){
                 }
             })
 
+            // reload the section
+            $('#refresh-data').on('click' , function(e){
+                covid_jobs.reloadDataApi();
+            })
             
         },
 
@@ -144,7 +152,7 @@ $(document).ready(function(e){
             var testCtx = $('#bar-linechart-test-analysis');
             var testLinechart = new Chart(testCtx, monthtestdata);
             $('#month-tests-cases').on('change', function(e){
-                mCases = $(this).val();
+                mTCases = $(this).val();
                 monthtestdata = covid_india.PrepareChartData.prepareTestedCasesChartData(mTCases);
                 testLinechart = new Chart(testCtx, monthtestdata);
             })

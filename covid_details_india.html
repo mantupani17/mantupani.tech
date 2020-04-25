@@ -57,10 +57,31 @@
             font-weight: 800;
         }
 
-        .make-red{
+        #actions-btn .fa-refresh{
+            display: none;
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                background-color: lightblue;
+            }
+            #search_state{
+                float: left;
+                margin-left: -13px;
+            }
+            #actions-btn .fa-refresh{
+                float: right;
+                margin: 8px 8px;
+                font-size: 21px;
+                font-weight: 800;
+                display: block;
+                cursor: pointer;
+            }
+        }
+        /* .make-red{
             background-color: red!important;
             color:white!important;
-        }
+        } */
             
     </style>
 </head>
@@ -221,6 +242,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             <div class="row" id="actions-btn">
                 <div class="col col-md-12">
                     <input type="text" id="search_state" class="pull-right" placeholder="please enter state name..."/>
+                    <i class="fa fa-refresh" aria-hidden="true" id="refresh-data"></i>
                 </div>
             </div>
             <div class="row">
@@ -278,7 +300,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                             <canvas id="bar-linechart-states" height="100%" width="100%"></canvas>
                         </div>
                         <div class="col-sm-12 col-lg-12 col-md-12 col-xl-12">
-                            <select id="month-tests-cases" class="pull-right filter-month">
+                            <select id="month-tests-cases" class="pull-right">
                                 <option value="" disabled>Select Month</option>
                                 <option value="January">January</option>
                                 <option value="February">February</option>
@@ -357,6 +379,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/covid-india/jobs.js"></script>
     <script src="js/covid-india/custom.js"></script>
     <script src="js/covid-india/covid-19-india.js"></script>
+    <script src="js/covid-india/covid-india-events.js"></script>
     <script src="js/covid-india/covid-inidia-handler.js"></script>
     <!-- end custom js -->
     <script src="js/main.js"></script>

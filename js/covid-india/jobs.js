@@ -54,5 +54,7 @@
         covid_jobs.allDistrictData = JSON.parse(localStorage.getItem('allDistrictData'));
     }
     
+    covid_jobs['reloadDataApi'] = runDataAPI;
+    // console.log(covid_jobs)
     window['covid_jobs'] = covid_jobs;
 })(window , covid_apis, $);
