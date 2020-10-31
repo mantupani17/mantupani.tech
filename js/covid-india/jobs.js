@@ -33,6 +33,19 @@
         });
     }
 
+    // call covid logs
+    function runLogsDataAPI(){
+        $.ajax({
+            url:covid_apis.logs_api,
+            type:'GET',
+            success: function(data){
+                console.log(data)
+                // setInLocal('allDistrictData', data);
+            },
+            async: false
+        });
+    }
+
 
     function setInLocal(item, data){
         if(localStorage.getItem(item)){
@@ -53,7 +66,7 @@
         covid_jobs.allData = JSON.parse(localStorage.getItem('allData'));
         covid_jobs.allDistrictData = JSON.parse(localStorage.getItem('allDistrictData'));
     }
-    
+    // runLogsDataAPI();
     covid_jobs['reloadDataApi'] = runDataAPI;
     // console.log(covid_jobs)
     window['covid_jobs'] = covid_jobs;

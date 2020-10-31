@@ -169,6 +169,25 @@ $(document).ready(function(e){
             }
         }
     } 
+
+
+    // Event deligaion
+    // document.addEventListener('click', function (event) {
+
+    //     if (event.target.matches('.modal-open')) {
+    //         // Run your code to open a modal
+    //     }
+    
+    //     if (event.target.matches('.close')) {
+    //         // Run your code to close a modal
+    //     }
+    
+    // }, false);
+
+    var map1 = Immutable.Map({ a: 1, b: 2, c: 3 });
+    map1 = map1.set('b', 50);
+
+    console.log(map1.get('b'))
     
     CovidTask.renderData();
     CovidChartTask.loadStateChart();
